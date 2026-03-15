@@ -403,7 +403,7 @@
   .legend-line {
     width: 28px;
     height: 3px;
-    background: linear-gradient(90deg, #c9a84c, #e8c96d);
+    background: linear-gradient(90deg, #3a7bd5, #5a9ff5);
     border-radius: 2px;
   }
 
@@ -447,11 +447,6 @@
 
   <div class="places-list" id="places-list"></div>
 
-  <div class="sidebar-footer">
-    <div class="Copyrights">
-    <p style="font-size:10px;">Made by Rober Mamani</p>
-    </div>
-  </div>
 </aside>
 
 <!-- MAP -->
@@ -461,13 +456,19 @@
     <div class="spinner"></div>
     <span>Loading walking route…</span>
   </div>
-  <div id="route-legend">
+  <!-- <div id="route-legend">
     <div class="legend-line"></div>
     Walking Route
     <span id="route-distance"></span>
   </div>
+</div> -->
+<div id="route-legend">
+    <div class="legend-line"></div>
+    Walking Route
+    <span id="route-distance"></span>
+  </div>
+<div style="font-size:10px; color:#7a7870;">Made by Rober Mamani</div>
 </div>
-
 <script>
 // ─────────────────────────────────────────────────────────────────
 coded = 'pk.eyJ1Ijoicm9iZXJtIiwiYSI6ImNtazZrdXd5NjBtYmYzZXNoOXB3YmxweWEifQ.OcryZGeruMGRUOaCpAiO5w'
