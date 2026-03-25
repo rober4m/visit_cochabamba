@@ -67,7 +67,16 @@
     line-height: 1.1;
     color: var(--text);
   }
-
+  .section-divider {
+    padding: 10px 24px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: rgba(201,168,76,.06);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
   .sidebar-header h1 span { color: var(--gold); }
 
   .route-meta {
@@ -446,7 +455,11 @@
   </div>
 
   <div class="places-list" id="places-list"></div>
-
+  <!-- NEW: Optional places section -->
+  <div class="section-divider">
+    <span>Also worth visiting</span>
+  </div>
+  <div class="places-list" id="optional-list"></div>
 </aside>
 
 <!-- MAP -->
@@ -575,7 +588,95 @@ const places = [
     mapsUrl: 'https://maps.app.goo.gl/VYpGZvWRVcamxZSM6',
   },
 ];
-
+// ─── OPTIONAL PLACES DATA ─────────────────────────────────────────────────
+// coords: [longitude, latitude]
+const optionalPlaces = [
+{
+    name: 'Cofi - Plaza',
+    type: 'Café',
+    desc: 'A specialty coffee spot steps from the main plaza, beloved for its carefully sourced Bolivian beans and relaxed atmosphere at fair prices.',
+    coords: [-66.15638110548045, -17.393827694421194],
+    mapsUrl: 'https://maps.app.goo.gl/aJahEmqarCPC4Ny6A',
+  },
+  {
+    name: 'Cafe Plaza',
+    type: 'Café',
+    desc: 'A classic Cochabamba café with a privileged view over Plaza 14 de Septiembre, perfect for a slow morning coffee watching the city come to life.',
+    coords: [-66.15748900921092, -17.394200435242677],
+    mapsUrl: 'https://maps.app.goo.gl/i3wXkacWuDEKTjQd8',
+  },
+  {
+    name: 'Pasaje Catedral',
+    type: 'Street',
+    desc: 'A narrow historic passageway running alongside the Cathedral, lined with small vendors and colonial details that reward a slow, curious stroll.',
+    coords: [-66.15678739036548, -17.39473403300724],
+    mapsUrl: '',
+  },
+  {
+    name: 'Mercado 27 de Mayo',
+    type: 'Market',
+    desc: 'A bustling traditional market brimming with fresh produce, street food and local crafts — the most authentic taste of everyday Cochabamba life.',
+    coords: [-66.15528478991152, -17.39485014961911],
+    mapsUrl: 'https://maps.app.goo.gl/EunHypDhCtwmLp916',
+  },
+  {
+    name: 'Typica - Centro',
+    type: 'Coffee Shop',
+    desc: 'A modern specialty coffee shop championing Bolivian single-origin roasts, with a clean minimal interior that has made it a favourite among locals.',
+    coords: [-66.15799016074304, -17.38596398507555],
+    mapsUrl: 'https://maps.app.goo.gl/uwVyLjCnCcYuimki9',
+  },
+  {
+    name: 'Casa del Campo',
+    type: 'Restaurant',
+    desc: 'A welcoming restaurant serving hearty traditional Bolivian cuisine in a warm, rustic setting — ideal for a proper sit-down lunch after sightseeing.',
+    coords: [-66.15164271004689, -17.378570359057367],
+    mapsUrl: 'https://maps.app.goo.gl/zNoVFNesFmFREof69',
+  },
+  {
+    name: 'Los Castores',
+    type: 'Salteñas',
+    desc: 'A legendary Cochabamba institution serving some of the city\'s finest salteñas — juicy, golden-baked pastries best enjoyed as a mid-morning snack.',
+    coords: [-66.15314791462839, -17.378523568955877],
+    mapsUrl: 'https://maps.app.goo.gl/dohcihNSEJLb8jJR8',
+  },
+  {
+    name: 'Muela del Diablo',
+    type: 'Restaurant',
+    desc: 'A popular local restaurant known for generous portions of Bolivian comfort food at honest prices, always buzzing with neighbourhood regulars.',
+    coords: [-66.1542662336101, -17.379100454872134],
+    mapsUrl: 'https://maps.app.goo.gl/8otQeog7uRd5yC8c9',
+  },
+  {
+    name: 'Cofi - Pando',
+    type: 'Café',
+    desc: 'The second outpost of Cochabamba\'s favourite specialty coffee brand, bringing the same quality beans and laid-back vibe to the Pando neighbourhood.',
+    coords: [-66.15093232876275, -17.374098930631504],
+    mapsUrl: 'https://maps.app.goo.gl/pJArnFYjsUE7RzjG6',
+  },
+  {
+    name: 'Typica - Fidel Anze',
+    type: 'Coffee',
+    desc: 'A bright and airy Typica branch on Fidel Anze, serving exceptional Bolivian filter and espresso drinks in one of the city\'s most pleasant café settings.',
+    coords: [-66.14881034870142, -17.37142051565003],
+    mapsUrl: 'https://maps.app.goo.gl/JWKsM35mA7xM6iWG8',
+  },
+  {
+    name: 'El Pueblito',
+    type: 'Landmark',
+    desc: 'A charming open-air complex of colonial-style buildings recreating a traditional Bolivian village, home to craft shops, restaurants and cultural events.',
+    coords: [-66.14137895323796, -17.375077436882606],
+    mapsUrl: 'https://maps.app.goo.gl/CVQmCev9TasAPdsP8',
+  },
+  {
+    name: 'Cristo de la Concordia',
+    type: 'Landmark',
+    desc: 'A monumental statue of Christ standing 34 metres tall atop Cerro San Pedro, offering breathtaking panoramic views over the entire Cochabamba valley.',
+    coords: [-66.13499821104108, -17.384367512345914],
+    mapsUrl: 'https://maps.app.goo.gl/EKoqUUkkVsJwK4zZ7',
+  },
+  // add more...
+];
 // ─── SIDEBAR ─────────────────────────────────────────────────────
 const list = document.getElementById('places-list');
 
@@ -601,6 +702,30 @@ places.forEach((p, i) => {
   list.appendChild(card);
 });
 
+// ─── SIDEBAR Optional places ─────────────────────────────────────────────────────
+const optionalList = document.getElementById('optional-list');
+
+optionalPlaces.forEach((p, i) => {
+  const letter = String.fromCharCode(65 + i); // 65 = 'A'
+  const card = document.createElement('div');
+  card.className = 'place-card';
+  card.dataset.index = i;
+  card.innerHTML = `
+    <div class="place-num" style="background:#4a90d9;">${letter}</div>
+    <div class="place-info">
+      <div class="place-type">${p.type}</div>
+      <div class="place-name">${p.name}</div>
+      <div class="place-desc">${p.desc}</div>
+      <div class="place-actions">
+        <a class="gmaps-btn" href="${p.mapsUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+          Maps
+        </a>
+      </div>
+    </div>`;
+  card.addEventListener('click', () => focusOptional(i));
+  optionalList.appendChild(card);
+});
 // ─── MAP INIT ────────────────────────────────────────────────────
 mapboxgl.accessToken = MAPBOX_TOKEN;
 
@@ -723,7 +848,20 @@ map.on('load', async () => {
 
     el.addEventListener('click', () => focusPlace(i));
   });
+  optionalPlaces.forEach((p, i) => {
+  const letter = String.fromCharCode(65 + i);
+  const el = document.createElement('div');
+  el.className = 'marker-wrap';
+  el.innerHTML = `
+    <div class="marker-circle" style="background:#4a90d9;">${letter}</div>
+    <div class="marker-tail" style="border-top-color:#4a90d9;"></div>`;
 
+  new mapboxgl.Marker({ element: el, anchor: 'bottom' })
+    .setLngLat(p.coords)
+    .addTo(map);
+
+  el.addEventListener('click', () => focusOptional(i));
+});
   // Fit to all markers
   const bounds = places.reduce(
     (b, p) => b.extend(p.coords),
@@ -758,6 +896,26 @@ function focusPlace(i) {
       <div class="popup-num">Stop ${i + 1} of ${places.length}</div>
       <div class="popup-name">${p.name}</div>
       <div class="popup-meta">${p.type} · ⏱ ${p.duration}</div>
+      <a class="popup-gmaps" href="${p.mapsUrl}" target="_blank" rel="noopener">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="#4a90d9">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/>
+        </svg>
+        Open in Google Maps
+      </a>`)
+    .addTo(map);
+}
+// ─── FOCUS OPTIONAL PLACES ─────────────────────────────────────────────────
+function focusOptional(i) {
+  const p = optionalPlaces[i];
+  map.flyTo({ center: p.coords, zoom: 15, speed: 1.2 });
+
+  if (activePopup) activePopup.remove();
+  activePopup = new mapboxgl.Popup({ offset: 46, closeButton: true })
+    .setLngLat(p.coords)
+    .setHTML(`
+      <div class="popup-num" style="color:#4a90d9;">Optional · ${String.fromCharCode(65 + i)}</div>
+      <div class="popup-name">${p.name}</div>
+      <div class="popup-meta">${p.type}</div>
       <a class="popup-gmaps" href="${p.mapsUrl}" target="_blank" rel="noopener">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="#4a90d9">
           <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/>
